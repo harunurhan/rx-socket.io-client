@@ -1,0 +1,50 @@
+{
+  "name": "rx-socket.io-client",
+  "version": "1.0.0",
+  "description": "Easy to use rxjs powered wrapper for socket.io-client",
+  "main": "dist/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "start": "karma start karma.config.js",
+    "test": "karma start karma.config.js --single-run",
+    "lint": "tslint \"src/**/*.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/harunurhan/rx-socket.io-client.git"
+  },
+  "keywords": [
+    "typescript",
+    "socket.io",
+    "rxjs",
+    "reactivex",
+    "socket.io-client",
+    "javascript",
+    "module"
+  ],
+  "author": "Harun Urhan <harunurhan17@gmail.com> (http://github.com/harunurhan)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harunurhan/rx-socket.io-client/issues"
+  },
+  "homepage": "https://github.com/harunurhan/rx-socket.io-client#readme",
+  "peerDependencies": {
+    "rxjs": "^5.5.6",
+    "socket.io-client": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.5.54",
+    "@types/socket.io-client": "^1.4.32",
+    "jasmine-core": "^2.8.0",
+    "karma": "^1.7.1",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-socketio-server": "^1.0.0",
+    "karma-typescript": "^3.0.5",
+    "rxjs": "^5.5.6",
+    "socket.io-client": "^2.0.4",
+    "tslint": "^5.7.0",
+    "typescript": "^2.5.2"
+  }
+}
