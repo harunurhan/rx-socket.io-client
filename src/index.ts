@@ -32,6 +32,14 @@ export class RxSocket<T> {
     this.socket = socketIO(url, options);
   }
 
+  public disconnect(): void {
+    this.socket.disconnect();
+  }
+
+  public connect(): void {
+    this.socket.connect();
+  }
+
   public fromEvent(event: string): Subject<T> {
     return this.createEventSubject(event);
   }
