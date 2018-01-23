@@ -1,4 +1,4 @@
-## rx-socket.io-client [WIP, not yet released]
+## rx-socket.io-client
 
 Easy to use `rxjs` powered wrapper for `socket.io-client`.
 
