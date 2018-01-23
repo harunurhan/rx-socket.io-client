@@ -16,6 +16,8 @@ module.exports = function (config) {
         socket.on('karma-mirror-event', function (data) {
           socket.emit('karma-mirror-event', data);
         });
+
+        socket.emit('karma-welcoming-event', 'welcome');
       }
     },
     browsers: ["Chrome"]

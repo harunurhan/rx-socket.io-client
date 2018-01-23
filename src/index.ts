@@ -40,18 +40,16 @@ export class RxSocket<T> {
     this.socket.connect();
   }
 
-  public fromEvent(event: string): Subject<T> {
+  public observable(event: string): Observable<T> {
+    return this.createEventObservable(event);
+  }
+
+  public subject(event: string): Subject<T> {
     return this.createEventSubject(event);
   }
 
   private createEventSubject(event: string): Subject<T> {
-    const incoming$ = Observable.create(
-      (incoming: Observer<T>) => {
-        this.socket.on(event, (data: T) => {
-          incoming.next(data);
-        });
-        return () => { this.onEventSubjectUnsubscribe(event); };
-      });
+    const incoming$ = this.createEventObservable(event);
     const outgoing = {
       next: (data: T) => {
         this.socket.emit(event, data);
@@ -60,8 +58,18 @@ export class RxSocket<T> {
     return Subject.create(outgoing, incoming$);
   }
 
+  private createEventObservable(event: string): Observable<T> {
+    return Observable.create(
+      (incoming: Observer<T>) => {
+        this.socket.on(event, (data: T) => {
+          incoming.next(data);
+        });
+        return () => { this.onEventSubjectUnsubscribe(event); };
+      });
+  }
+
   private onEventSubjectUnsubscribe(event: string): void {
-    // FIXME: conditional socket.disconnect or socket.removeListener?
+    // FIXME: conditional socket.disconnect or socket.removeListener
   }
 
 }
