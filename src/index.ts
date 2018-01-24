@@ -25,7 +25,7 @@ import { Observer } from 'rxjs/Observer';
 import { Subject } from 'rxjs/Subject';
 import * as socketIO from 'socket.io-client';
 
-export class RxSocket<T> {
+export class RxSocket<DT> {
   private socket: SocketIOClient.Socket;
 
   constructor(url: string, options?: SocketIOClient.ConnectOpts) {
@@ -40,16 +40,16 @@ export class RxSocket<T> {
     this.socket.connect();
   }
 
-  public observable(event: string): Observable<T> {
-    return this.createEventObservable(event);
+  public observable<T = DT>(event: string): Observable<T> {
+    return this.createEventObservable<T>(event);
   }
 
-  public subject(event: string): Subject<T> {
-    return this.createEventSubject(event);
+  public subject<T = DT>(event: string): Subject<T> {
+    return this.createEventSubject<T>(event);
   }
 
-  private createEventSubject(event: string): Subject<T> {
-    const incoming$ = this.createEventObservable(event);
+  private createEventSubject<T>(event: string): Subject<T> {
+    const incoming$ = this.createEventObservable<T>(event);
     const outgoing = {
       next: (data: T) => {
         this.socket.emit(event, data);
@@ -58,7 +58,7 @@ export class RxSocket<T> {
     return Subject.create(outgoing, incoming$);
   }
 
-  private createEventObservable(event: string): Observable<T> {
+  private createEventObservable<T>(event: string): Observable<T> {
     return Observable.create(
       (incoming: Observer<T>) => {
         this.socket.on(event, (data: T) => {
