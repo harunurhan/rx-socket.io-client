@@ -15,6 +15,9 @@ Requires `socket.io-client` and `rxjs` as `peerDependency`, incase you don't hav
 ### Use
 
 ```typescript
+import { RxSocket } from 'rx-socket.io-client';
+
+
 const socket = new RxSocket('/url/to/socket.io/server'); // javascript 
 
 const event$ = socket.subject('event_name'); // get rxjs/Subject for a specific event
